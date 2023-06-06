@@ -1,86 +1,79 @@
 #include <iostream>
 using namespace std;
+
 /*
-В прошлый раз я написал вам дз по частям компьютера.
+Создать класс Overcoat (верхняя одежда).
+Реализовать перегруженные операторы:
+1. Проверка на равенство типов одежды (операция = =).
+2. Операцию присваивания одного объекта в другой
+(операция =).
+3. Сравнение по цене двух пальто одного типа (операция>).*/
 
-Как вы уже поняли, там надо создавать много структур с одинаковыми полями. Реализуйте там наследование.
-*/
 
-class Component {
+class Overcoat {
 private:
-    string model;
+	string tipodejdi;
+	double price;
 public:
-    Component(const string& model) : model(model){}
-    string getModel() const {
-        return model;
-    }
+	Overcoat(const string& tipodejdi, const double& price) : tipodejdi(tipodejdi), price(price){}
+	bool operator == (const Overcoat& other) const {
+		return tipodejdi == other.tipodejdi;
+	}
+	bool operator > (const Overcoat& other) const {
+		return tipodejdi == other.tipodejdi;
+		return price > other.price;
+	}
+	void operator = (const Overcoat& other) {
+		tipodejdi = other.tipodejdi;
+		price = other.price;
+	}
 };
 
+/*Создать класс Flat (квартира).
+Реализовать перегруженные операторы:
+1. Проверка на равенство площадей квартир (операция
+==).
+2. Операцию присваивания одного объекта в другой
+(операция =).
+3. Сравнение двух квартир по цене (операция>).*/
 
-class Processor : public Component {
+class Flat {
 private:
-    double frequency;
+	string flat;
+	double square;
 public:
-    Processor(const string& model, const double& frequency) : Component(model), frequency(frequency){}
-    double getFrequency() const {
-        return frequency;
-    }
+	Flat(const string& flat, const double& square) : flat(flat), square(square){}
+	bool operator == (const Flat& other) const {
+		return flat == other.flat;
+	}
+	void operator = (const Flat& other) {
+		flat = other.flat;
+		square = other.square;
+	}
+	bool operator > (const Flat& other) const {
+		return flat == other.flat;
+		return square > other.square;
+	}
 };
 
-class Memory : public Component {
-private:
-    int capacity;
-public:
-    Memory(const string& model, const int& capacity) : Component(model), capacity(capacity){}
-    int getCapacity() const {
-        return capacity;
-    }
-};
-
-class Storage : public Component {
-private:
-    int volume;
-public:
-    Storage(const string& model, const int& volume) : Component(model), volume(volume) {}
-    int getVolume() const {
-        return volume;
-    }
-};
-
-class SSD : public Component {
-private:
-    int volumeSSD;
-public:
-    SSD(const string& model, const int& volumeSSD) : Component(model), volumeSSD(volumeSSD){}
-    int getVolumeSSD() const {
-        return volumeSSD;
-    }
-};
-
-class Computer {
-private:
-    Processor processor;
-    Memory memory;
-    Storage storage;
-    SSD ssd;
-public:
-    Computer(const Processor& processor, const Memory& memory, const Storage& storage, const SSD& ssd) : processor(processor), memory(memory), storage(storage), ssd(ssd){}
-    void getInfo() {
-        cout << "Характеристики: " << endl;
-        cout << "Процессор: " << processor.getModel() << " " << processor.getFrequency() << " GHz" << endl;
-        cout << "Оперативная память: " << memory.getModel() << " " << memory.getCapacity() << " Гб" << endl;
-        cout << "Жёсткий диск: " << storage.getModel() << " " << storage.getVolume() << " Гб" << endl;
-        cout << "SSD: " << ssd.getModel() << " " << ssd.getVolumeSSD() << " Гб" << endl;
-    }
-};
 
 
 int main() {
-    setlocale(LC_ALL, "ru");
-    Processor processor("Intel Core i9-9900K", 2.7);
-    Memory memory("HYPERX", 16);
-    Storage storage("KINGSTON", 500);
-    SSD ssd("KINGSTON SSD", 750);
-    Computer computer(processor, memory, storage, ssd);
-    computer.getInfo();
+	setlocale(LC_ALL, "ru");
+	Overcoat overcoat1("Adidas", 50.6);
+	Overcoat overcoat2("Salvar", 100);
+	if (overcoat1 > overcoat2) {
+		cout << "Adidas стоит дешевле чем ""Salvar\n";
+	}
+	else {
+		cout << "Adidas стоит дороже чем ""Salvar\n";
+	}
+	Flat flat1("Yasamaldaki evim", 5.7);
+	Flat flat2("Badamdardaki evim", 7.6);
+	if (flat1 > flat2) {
+		cout << "Ваш дом из ясамал больше чем из бадамдар\n";
+	}
+	else {
+		cout << "Ваш дом из ясамал меньше чем из бадамдар\n";
+	}
 }
