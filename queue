@@ -22,7 +22,7 @@ public:
 
     void pop() {
         if (!elements.empty()) {
-           elements.erase(elements.begin());
+            elements.erase(elements.begin());
         }
     }
 
@@ -41,6 +41,8 @@ public:
 int main() {
     Queue<int> queue;
     queue.push(11);
+    queue.pop();
+    queue.peek();
 
 
     while (!queue.isEmpty()) {
